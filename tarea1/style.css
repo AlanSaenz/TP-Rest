@@ -1,10 +1,8 @@
-/* reset 
+/* reset  */
 *{
     margin: 0px;
     padding: 0px;
-    box-sizing: border-box;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}*/
+}
 
 /* Estilo del contenedor de la lista de objetos */
 #lista_objetos_BD {
@@ -36,3 +34,7 @@
     background-color: #e45050;
 }
 
+/* Separacion entre el boton agregar y la lista de opciones */
+#boton_agregar{
+    padding-top: 10px;
+}

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 modificarBoton.textContent = 'Modificar';
                 modificarBoton.classList.add('modificar_boton'); // Agrega la clase modificar_boton al botón
                 modificarBoton.addEventListener('click', () => {
-                    
+                    modificarEstadoObjeto(item)
                 });
 
                 // Se agrega todas las cosas anteriormente creado
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //----------------------------------------------
     // Función para eliminar un objeto por ID
     function eliminarObjetoPorID(id) {
-        fetch(URL, {method: 'DELETE',})
+        fetch(URL + `?id=${id}`, {method: 'DELETE'})
         .then(response => {
             if (response.status === 200) {
                 return response.json();
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             console.log(data.message); // Muestra el mensaje de éxito en la consola
             // Actualiza la lista de objetos después de agregar
-            objectList.innerHTML = ''; // Borra la lista actual
+            contenedor_html.innerHTML = ''; // Borra la lista actual
             cargarObjetos(); // Vuelve a cargar la lista de objetos
         })
         .catch(error => console.error('Error:', error));
@@ -140,30 +140,28 @@ document.addEventListener('DOMContentLoaded', function () {
         const nombreObjeto = document.getElementById('nombre_tarea').value;
         
         const estadoSelect = document.getElementById('estadoSelect');
-        const estadoInput = document.getElementById('estado');
-
-        const estadoSelect2 = document.getElementById('estado');
-        const estadoSeleccionado = estadoSelect2.options[estadoSelect2.selectedIndex].value;
-
-        estadoInput.value = estadoSelect.value;
-
-        // Obtener el último ID
-        const ultimoID = obtenerUltimoID();
+        const opcionSeleccionada = estadoSelect.value;
 
         // Llamar a la función para agregar la tarea
-        agregarObjeto(nombreObjeto, estadoSeleccionado);
-        
-        // Log de aviso de que tarea se agrego
-        //log(`Se agregó la tarea: Nombre: ${nombreObjeto}, Estado: ${estadoInput}, ID: ${ultimoID}`);
+        agregarObjeto(nombreObjeto, opcionSeleccionada);
 
         // Actualizacion de los objetos
         contenedor_html.innerHTML = '';
         cargarObjetos();
     });
 
-    // Función para obtener el último ID (debes implementarla según tu lógica)
-    function obtenerUltimoID() {
-        return 9;
+    function modificarEstadoObjeto(objeto) {
+        const nuevoEstado = prompt("Ingresa el nuevo estado:");
+        
+        if (nuevoEstado !== null) {
+            actualizarObjetoPorID(objeto.ID, objeto.nombre, nuevoEstado)
+        }else{
+            alert('Error al querer modificar la tarea con el ID: ' + objeto.ID);
+        }
+
+        // Actualizacion de los objetos
+        contenedor_html.innerHTML = '';
+        cargarObjetos();
     }
 
     cargarObjetos(); // Carga la lista de objetos al cargar la página

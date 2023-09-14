@@ -18,14 +18,11 @@
         <div class="contenedor_agregar">
             <h4>Estado de la tarea</h4>
             <!-- Elemento de selección -->
-            <select id="estadoSelect" onchange="actualizarEstado()">
+            <select id="estadoSelect">
                 <option value="OK">OK</option>
                 <option value="En proceso">En proceso</option>
                 <option value="Finalizado">Finalizado</option>
             </select>
-
-            <!-- Input oculto para el estado -->s
-            <input type="hidden" id="estado" name="estado">
         </div>
         <button id="boton_agregar">Subir tarea a la base de datos</button>
     </div>
